@@ -1,0 +1,25 @@
+version: '3'
+
+services:
+  database:
+    image: bitnami/postgresql
+    container_name: tasks-microservice-tasks-database
+    restart: always
+    ports:
+      - ${DB_PORT}:5432
+    environment:
+      - POSTGRESQL_USERNAME=${DB_USERNAME}
+      - POSTGRESQL_PASSWORD=${DB_PASSWORD}
+      - POSTGRESQL_DATABASE=${DB_DATABASE}
+    # volumes:
+    #   - pgdata:/data/postgres
+  redis:
+    image: redis
+    container_name: tasks-microservice-tasks-redis
+    restart: always
+    ports:
+      - ${REDIS_PORT}:6379
+    environment:
+      - ALLOW_EMPTY_PASSWORD=yes
+    volumes:
+      - './data:/data'

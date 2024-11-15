@@ -18,12 +18,13 @@ enum Status {
   PENDING
 }
 
-model Tasks {
+model Task {
   id             String    @id @default(uuid())
   title          String
   date           DateTime
   completionDate DateTime?
   status         Status    @default(ACTIVE)
+  userId         String
   created_at     DateTime  @default(now())
 
   @@map("tasks")
