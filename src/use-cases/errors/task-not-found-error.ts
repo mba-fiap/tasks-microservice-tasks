@@ -1,5 +1,5 @@
 export class TaskNotFound extends Error {
-  constructor(id: string) {
+  constructor(id?: string) {
     super(`Task '${id}' not found.`)
   }
 }

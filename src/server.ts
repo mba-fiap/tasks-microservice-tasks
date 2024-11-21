@@ -1,6 +1,6 @@
 import { app } from './app'
 
-import { env } from './env'
+import { env } from '@/env'
 
 app
   .listen({
@@ -8,5 +8,9 @@ app
     port: env.PORT,
   })
   .then(() => {
-    console.log('🚀 HTTP Server Running!')
+    console.log(`🚀 HTTP Server Running at http://localhost:${env.PORT}!`)
+
+    console.log(
+      `📃 Documentation available at http://localhost:${env.PORT}/api-docs`
+    )
   })

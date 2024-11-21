@@ -1,19 +1,37 @@
 import { FastifyInstance } from 'fastify'
 
-import { create } from './create'
+import { verifyJwt } from '@/http/middlewares/verify-jwt'
 
-import { update } from './update'
+import { create, createSchema } from './create'
 
-import { complete } from './complete'
+import { update, updateSchema } from './update'
 
-import { filter } from './filter'
+import { complete, completeSchema } from './complete'
+
+import { filter, filterSchema } from './filter'
 
 export async function appRoutes(app: FastifyInstance) {
-  app.post('/tasks', create)
+  app.post('/tasks', {
+    onRequest: [verifyJwt],
+    handler: create,
+    schema: createSchema,
+  })
 
-  app.put('/tasks/:id', update)
+  app.put('/tasks/:id', {
+    onRequest: [verifyJwt],
+    handler: update,
+    schema: updateSchema,
+  })
 
-  app.put('/tasks/:id/complete', complete)
+  app.put('/tasks/:id/complete', {
+    onRequest: [verifyJwt],
+    handler: complete,
+    schema: completeSchema,
+  })
 
-  app.get('/tasks', filter)
+  app.get('/tasks', {
+    onRequest: [verifyJwt],
+    handler: filter,
+    schema: filterSchema,
+  })
 }
