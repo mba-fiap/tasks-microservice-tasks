@@ -14,10 +14,6 @@ interface UpdateUseCaseRequest {
   userId: string
 }
 
-interface UpdateUseCaseResponse {
-  task: Task
-}
-
 export class UpdateUseCase {
   constructor(private tasksRepository: TasksRepository) {}
 
@@ -27,7 +23,7 @@ export class UpdateUseCase {
     date,
     status,
     userId,
-  }: UpdateUseCaseRequest): Promise<UpdateUseCaseResponse> {
+  }: UpdateUseCaseRequest): Promise<Task> {
     const task = await this.tasksRepository.findById(id, userId)
 
     if (!task) {
@@ -42,8 +38,6 @@ export class UpdateUseCase {
 
     await this.tasksRepository.save(task)
 
-    return {
-      task,
-    }
+    return task
   }
 }

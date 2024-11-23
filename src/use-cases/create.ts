@@ -8,26 +8,16 @@ interface CreateUseCaseRequest {
   userId: string
 }
 
-interface CreateUseCaseResponse {
-  task: Task
-}
-
 export class CreateUseCase {
   constructor(private tasksRepository: TasksRepository) {}
 
-  async execute({
-    title,
-    date,
-    userId,
-  }: CreateUseCaseRequest): Promise<CreateUseCaseResponse> {
+  async execute({ title, date, userId }: CreateUseCaseRequest): Promise<Task> {
     const task = await this.tasksRepository.create({
       title,
       date,
       userId,
     })
 
-    return {
-      task,
-    }
+    return task
   }
 }

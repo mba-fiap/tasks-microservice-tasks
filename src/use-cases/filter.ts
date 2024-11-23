@@ -6,16 +6,10 @@ import { Status } from '@/enums/status.enum'
 
 interface FilterUseCaseRequest {
   title?: string
-  dateRange?: {
-    start: Date
-    end: Date
-  }
+  start?: Date
+  end?: Date
   status?: Status
   userId: string
-}
-
-interface FilterUseCaseResponse {
-  tasks: Task[] | undefined
 }
 
 export class FilterUseCase {
@@ -23,10 +17,11 @@ export class FilterUseCase {
 
   async execute({
     title,
-    dateRange,
+    start,
+    end,
     status,
     userId,
-  }: FilterUseCaseRequest): Promise<FilterUseCaseResponse> {
+  }: FilterUseCaseRequest): Promise<Task[] | undefined> {
     const filter: Prisma.TaskWhereInput = {
       userId,
     }
@@ -35,10 +30,10 @@ export class FilterUseCase {
       filter.title = { contains: title }
     }
 
-    if (dateRange) {
+    if (start || end) {
       filter.date = {
-        gte: dateRange.start,
-        lte: dateRange.end,
+        gte: start,
+        lte: end,
       }
     }
 
@@ -48,6 +43,6 @@ export class FilterUseCase {
 
     const tasks = await this.tasksRepository.findMany(filter)
 
-    return { tasks }
+    return tasks
   }
 }

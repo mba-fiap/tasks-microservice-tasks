@@ -12,7 +12,7 @@ import { UserNotAllowedError } from '@/use-cases/errors/user-not-allowed'
 
 const createBodySchema = z.object({
   title: z.string(),
-  date: z.date(),
+  date: z.coerce.date(),
 })
 
 const createContentSchema = z.object({

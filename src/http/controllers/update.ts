@@ -18,7 +18,7 @@ const updateParamsSchema = z.object({
 
 const updateBodySchema = z.object({
   title: z.string().optional(),
-  date: z.date().optional(),
+  date: z.coerce.date().optional(),
   status: z.enum(Object.values(Status) as [Status, ...Status[]]).optional(),
 })
 

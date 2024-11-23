@@ -10,14 +10,10 @@ import { Status } from '@/enums/status.enum'
 
 import { UserNotAllowedError } from '@/use-cases/errors/user-not-allowed'
 
-const filterBodySchema = z.object({
+const filterQuerySchema = z.object({
   title: z.string().optional(),
-  dateRange: z
-    .object({
-      start: z.date(),
-      end: z.date(),
-    })
-    .optional(),
+  start: z.coerce.date().optional(),
+  end: z.coerce.date().optional(),
   status: z.enum(Object.values(Status) as [Status, ...Status[]]).optional(),
 })
 
@@ -39,7 +35,7 @@ export const filterSchema = {
       bearerAuth: [],
     },
   ],
-  params: zodToJsonSchema(filterBodySchema),
+  queryObjects: zodToJsonSchema(filterQuerySchema),
   response: {
     201: {
       description: 'Tasks filtered successfully',
@@ -60,14 +56,15 @@ export const filterSchema = {
 }
 
 export async function filter(request: FastifyRequest, reply: FastifyReply) {
-  const { title, dateRange, status } = filterBodySchema.parse(request.body)
+  const { title, start, end, status } = filterQuerySchema.parse(request.query)
 
   try {
     const createUseCase = makeFilterUseCase()
 
     const tasks = await createUseCase.execute({
       title,
-      dateRange,
+      start,
+      end,
       status,
       userId: request.user.sub,
     })

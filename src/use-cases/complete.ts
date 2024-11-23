@@ -11,29 +11,24 @@ interface CompleteUseCaseRequest {
   userId: string
 }
 
-interface CompleteUseCaseResponse {
-  task: Task
-}
-
 export class CompleteUseCase {
   constructor(private tasksRepository: TasksRepository) {}
 
-  async execute({
-    id,
-    userId,
-  }: CompleteUseCaseRequest): Promise<CompleteUseCaseResponse> {
+  async execute({ id, userId }: CompleteUseCaseRequest): Promise<Task> {
     const task = await this.tasksRepository.findById(id, userId)
 
     if (!task) {
       throw new TaskNotFound(id)
     }
 
-    task.status = Status.INACTIVE
+    if (!task.completionDate) {
+      task.completionDate = new Date()
 
-    await this.tasksRepository.save(task)
+      task.status = Status.INACTIVE
 
-    return {
-      task,
+      await this.tasksRepository.save(task)
     }
+
+    return task
   }
 }
