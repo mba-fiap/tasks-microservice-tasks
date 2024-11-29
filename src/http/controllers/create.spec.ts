@@ -1,14 +1,12 @@
-import request from 'supertest'
-
-import { afterAll, beforeAll, describe, expect, it } from 'vitest'
-
 import { app } from '@/app'
+import request from 'supertest'
+import { afterAll, beforeAll, describe, expect, it } from 'vitest'
 
 import { prisma } from '@/lib/prisma'
 
-import { generateAuthToken } from '@/utils/test/generate-auth-token'
-
 import { UserNotAllowedError } from '@/use-cases/errors/user-not-allowed'
+
+import { generateAuthToken } from '@/utils/test/generate-auth-token'
 
 describe('Create Task (e2e)', () => {
   let token: string

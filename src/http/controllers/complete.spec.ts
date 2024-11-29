@@ -1,20 +1,15 @@
-import request from 'supertest'
-
-import { afterAll, beforeAll, describe, expect, it } from 'vitest'
-
-import { randomUUID } from 'node:crypto'
-
 import { app } from '@/app'
+import { Status } from '@/enums/status.enum'
+import { randomUUID } from 'node:crypto'
+import request from 'supertest'
+import { afterAll, beforeAll, describe, expect, it } from 'vitest'
 
 import { prisma } from '@/lib/prisma'
 
-import { Status } from '@/enums/status.enum'
+import { TaskNotFound } from '@/use-cases/errors/task-not-found-error'
+import { UserNotAllowedError } from '@/use-cases/errors/user-not-allowed'
 
 import { generateAuthToken } from '@/utils/test/generate-auth-token'
-
-import { TaskNotFound } from '@/use-cases/errors/task-not-found-error'
-
-import { UserNotAllowedError } from '@/use-cases/errors/user-not-allowed'
 
 describe('Complete Task (e2e)', () => {
   let token: string

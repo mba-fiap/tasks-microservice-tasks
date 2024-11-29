@@ -1,10 +1,9 @@
+import { Status } from '@/enums/status.enum'
 import { expect, describe, it, beforeEach } from 'vitest'
-
-import { FilterUseCase } from './filter'
 
 import { InMemoryTasksRepository } from '@/repositories/in-memory/in-memory-tasks-repository'
 
-import { Status } from '@/enums/status.enum'
+import { FilterUseCase } from './filter'
 
 let tasksRepository: InMemoryTasksRepository
 

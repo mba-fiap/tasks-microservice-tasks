@@ -1,14 +1,10 @@
+import { Status } from '@/enums/status.enum'
 import { FastifyReply, FastifyRequest } from 'fastify'
-
 import { z } from 'zod'
-
 import { zodToJsonSchema } from 'zod-to-json-schema'
 
-import { makeCreateUseCase } from '@/use-cases/factories/make-create-use-case'
-
-import { Status } from '@/enums/status.enum'
-
 import { UserNotAllowedError } from '@/use-cases/errors/user-not-allowed'
+import { makeCreateUseCase } from '@/use-cases/factories/make-create-use-case'
 
 const createBodySchema = z.object({
   title: z.string(),

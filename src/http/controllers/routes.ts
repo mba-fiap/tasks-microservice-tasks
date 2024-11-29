@@ -2,13 +2,10 @@ import { FastifyInstance } from 'fastify'
 
 import { verifyJwt } from '@/http/middlewares/verify-jwt'
 
-import { create, createSchema } from './create'
-
-import { update, updateSchema } from './update'
-
 import { complete, completeSchema } from './complete'
-
+import { create, createSchema } from './create'
 import { filter, filterSchema } from './filter'
+import { update, updateSchema } from './update'
 
 export async function appRoutes(app: FastifyInstance) {
   app.post('/tasks', {

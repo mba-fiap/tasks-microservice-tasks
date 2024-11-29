@@ -1,8 +1,7 @@
+import { Status } from '@/enums/status.enum'
 import { Prisma, Task } from '@prisma/client'
 
 import { TasksRepository } from '@/repositories/tasks-repository'
-
-import { Status } from '@/enums/status.enum'
 
 interface FilterUseCaseRequest {
   title?: string

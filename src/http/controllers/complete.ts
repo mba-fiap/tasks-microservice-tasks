@@ -1,16 +1,11 @@
+import { Status } from '@/enums/status.enum'
 import { FastifyReply, FastifyRequest } from 'fastify'
-
 import { z } from 'zod'
-
 import { zodToJsonSchema } from 'zod-to-json-schema'
 
-import { makeCompleteUseCase } from '@/use-cases/factories/make-complete-use-case'
-
-import { Status } from '@/enums/status.enum'
-
 import { TaskNotFound } from '@/use-cases/errors/task-not-found-error'
-
 import { UserNotAllowedError } from '@/use-cases/errors/user-not-allowed'
+import { makeCompleteUseCase } from '@/use-cases/factories/make-complete-use-case'
 
 const completeParamsSchema = z.object({
   id: z.string().uuid(),

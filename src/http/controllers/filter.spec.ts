@@ -1,14 +1,10 @@
+import { app } from '@/app'
+import { Status } from '@/enums/status.enum'
+import { randomUUID } from 'node:crypto'
 import request from 'supertest'
-
 import { afterAll, beforeAll, describe, expect, it } from 'vitest'
 
-import { randomUUID } from 'node:crypto'
-
-import { app } from '@/app'
-
 import { prisma } from '@/lib/prisma'
-
-import { Status } from '@/enums/status.enum'
 
 import { UserNotAllowedError } from '@/use-cases/errors/user-not-allowed'
 

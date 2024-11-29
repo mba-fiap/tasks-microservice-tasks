@@ -1,8 +1,8 @@
 import { expect, describe, it, beforeEach } from 'vitest'
 
-import { CreateUseCase } from './create'
-
 import { InMemoryTasksRepository } from '@/repositories/in-memory/in-memory-tasks-repository'
+
+import { CreateUseCase } from './create'
 
 let tasksRepository: InMemoryTasksRepository
 

@@ -1,5 +1,4 @@
 import { Task, Prisma, Status } from '@prisma/client'
-
 import { randomUUID } from 'node:crypto'
 
 import { TasksRepository } from '@/repositories/tasks-repository'

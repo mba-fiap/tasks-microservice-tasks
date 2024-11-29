@@ -1,14 +1,10 @@
+import { Status } from '@/enums/status.enum'
 import { FastifyReply, FastifyRequest } from 'fastify'
-
 import { z } from 'zod'
-
 import { zodToJsonSchema } from 'zod-to-json-schema'
 
-import { makeFilterUseCase } from '@/use-cases/factories/make-filter-use-case'
-
-import { Status } from '@/enums/status.enum'
-
 import { UserNotAllowedError } from '@/use-cases/errors/user-not-allowed'
+import { makeFilterUseCase } from '@/use-cases/factories/make-filter-use-case'
 
 const filterQuerySchema = z.object({
   title: z.string().optional(),

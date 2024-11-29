@@ -1,12 +1,10 @@
+import { Status } from '@/enums/status.enum'
 import { expect, describe, it, beforeEach } from 'vitest'
-
-import { UpdateUseCase } from './update'
 
 import { InMemoryTasksRepository } from '@/repositories/in-memory/in-memory-tasks-repository'
 
-import { Status } from '@/enums/status.enum'
-
 import { TaskNotFound } from './errors/task-not-found-error'
+import { UpdateUseCase } from './update'
 
 let tasksRepository: InMemoryTasksRepository
 
