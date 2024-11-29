@@ -23,7 +23,7 @@ export async function appRoutes(app: FastifyInstance) {
     schema: updateSchema,
   })
 
-  app.put('/tasks/:id/complete', {
+  app.post('/tasks/:id/complete', {
     onRequest: [verifyJwt],
     handler: complete,
     schema: completeSchema,

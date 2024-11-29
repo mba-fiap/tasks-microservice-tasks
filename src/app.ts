@@ -14,25 +14,26 @@ export const app = fastify()
 
 app.register(fastifyJwt, {
   secret: env.JWT_SECRET,
-  sign: {
-    expiresIn: '60m',
-  },
 })
 
 appSwagger(app)
 
 app.register(appRoutes)
 
-app.setErrorHandler((error, _, reply) => {
+app.setErrorHandler((error, request, reply) => {
+  if (error.validation) {
+    return reply.status(400).send({
+      message: 'Validation error',
+      issues: error.validation,
+    })
+  }
+
   if (error instanceof ZodError) {
-    return reply
-      .status(400)
-      .send({ message: 'Validation error.', issues: error.format() })
+    return reply.status(400).send({
+      message: 'Validation error',
+      issues: error.errors,
+    })
   }
 
-  if (env.NODE_ENV !== 'production') {
-    console.error(error)
-  }
-
-  return reply.status(500).send({ message: 'Internal server error.' })
+  return reply.status(500).send({ message: 'Internal server error' })
 })

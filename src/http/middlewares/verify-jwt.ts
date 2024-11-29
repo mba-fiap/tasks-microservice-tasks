@@ -1,8 +1,8 @@
-import { FastifyRequest } from 'fastify'
+import { FastifyReply, FastifyRequest } from 'fastify'
 
 import { UserNotAllowedError } from '@/use-cases/errors/user-not-allowed'
 
-export async function verifyJwt(request: FastifyRequest) {
+export async function verifyJwt(request: FastifyRequest, reply: FastifyReply) {
   try {
     // const userId = request.user.sub
 
@@ -10,6 +10,8 @@ export async function verifyJwt(request: FastifyRequest) {
 
     await request.jwtVerify()
   } catch {
-    throw new UserNotAllowedError()
+    return reply
+      .status(401)
+      .send({ message: new UserNotAllowedError().message })
   }
 }
