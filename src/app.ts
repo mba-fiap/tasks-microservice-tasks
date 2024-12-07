@@ -1,10 +1,15 @@
 import fastifyJwt from '@fastify/jwt'
 import fastify from 'fastify'
+import 'reflect-metadata'
 import { ZodError } from 'zod'
 
 import { env } from '@/env'
 
 import { appRoutes } from '@/http/controllers/routes'
+
+import '@/shared'
+
+import './listeners'
 
 import { appSwagger } from './swagger'
 

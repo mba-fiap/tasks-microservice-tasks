@@ -29,6 +29,10 @@ export class FilterUseCase {
       filter.title = { contains: title }
     }
 
+    console.log('start', start)
+
+    console.log('end', end)
+
     if (start || end) {
       filter.date = {
         gte: start,
@@ -39,6 +43,8 @@ export class FilterUseCase {
     if (status) {
       filter.status = status
     }
+
+    console.log('filter', filter)
 
     const tasks = await this.tasksRepository.findMany(filter)
 
