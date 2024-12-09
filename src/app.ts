@@ -1,3 +1,4 @@
+import fastifyCors from '@fastify/cors'
 import fastifyJwt from '@fastify/jwt'
 import fastify from 'fastify'
 import 'reflect-metadata'
@@ -17,6 +18,12 @@ export const app = fastify()
 
 app.register(fastifyJwt, {
   secret: env.JWT_SECRET,
+})
+
+app.register(fastifyCors, {
+  origin: '*',
+  methods: ['GET', 'POST', 'PUT', 'DELETE'],
+  allowedHeaders: ['Content-Type', 'Authorization'],
 })
 
 appSwagger(app)
