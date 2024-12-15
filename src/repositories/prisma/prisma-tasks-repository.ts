@@ -25,6 +25,7 @@ export class PrismaTasksRepository implements TasksRepository {
   async findMany(filter: Prisma.TaskWhereInput): Promise<Task[]> {
     return prisma.task.findMany({
       where: filter,
+      orderBy: [{ status: 'asc' }, { date: 'asc' }],
     })
   }
 

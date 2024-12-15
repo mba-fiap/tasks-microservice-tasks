@@ -24,8 +24,6 @@ export async function verifyJwt(request: FastifyRequest, reply: FastifyReply) {
     if (!user) {
       const api = createApi(env.REGISTER_MICROSERVICE_API_URL)
 
-      console.log(2222, request.headers.authorization)
-
       const { data } = await api.get('/users', {
         headers: {
           Authorization: request.headers.authorization,
@@ -44,7 +42,7 @@ export async function verifyJwt(request: FastifyRequest, reply: FastifyReply) {
       }
     }
   } catch (err) {
-    console.log(err)
+    console.error(err)
 
     return reply
       .status(401)

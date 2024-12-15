@@ -26,12 +26,8 @@ export class FilterUseCase {
     }
 
     if (title) {
-      filter.title = { contains: title }
+      filter.title = { contains: title, mode: 'insensitive' }
     }
-
-    console.log('start', start)
-
-    console.log('end', end)
 
     if (start || end) {
       filter.date = {
@@ -43,8 +39,6 @@ export class FilterUseCase {
     if (status) {
       filter.status = status
     }
-
-    console.log('filter', filter)
 
     const tasks = await this.tasksRepository.findMany(filter)
 
